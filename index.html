@@ -110,7 +110,7 @@
       <section class="card">
         <h1>FlightCal Privacy Policy</h1>
         <p class="meta">
-          Effective date: October 25, 2026
+          Effective date: October 31, 2026
           <br />
           Service provider: SmartPilots
         </p>
@@ -156,8 +156,8 @@
             exchange-rate data stored on the device to improve performance and offline usability.
           </li>
           <li>
-            <strong>Purchase status data</strong> returned by Google Play Billing in order to
-            confirm entitlement to premium features.
+            <strong>Purchase status data</strong> returned by Google Play Billing (Android) or the
+            Apple App Store (iOS) in order to confirm entitlement to premium features.
           </li>
         </ul>
 
@@ -210,8 +210,9 @@
             <code>open.exchangerate-api.com</code>.
           </li>
           <li>
-            <strong>Google Play Billing</strong>, which processes purchase transactions and returns
-            purchase status information needed for premium access.
+            <strong>Google Play Billing (Android) and the Apple App Store, including StoreKit
+            (iOS)</strong>, which process purchase transactions and return purchase status
+            information needed for premium access.
           </li>
         </ul>
         <p>
@@ -221,18 +222,25 @@
 
         <h2>6. In-App Purchases</h2>
         <p>
-          FlightCal offers premium functionality through Google Play Billing. Purchase processing
-          is handled by Google Play. FlightCal may receive limited purchase-related information,
-          such as product identifiers, purchase status, and billing entitlement status, in order to
-          unlock premium features. FlightCal does not receive or store your full payment card
-          number.
+          FlightCal offers premium functionality through Google Play Billing on Android and Apple
+          In-App Purchase (StoreKit) on iOS. Purchase processing is handled by Google Play or Apple
+          respectively. FlightCal may receive limited purchase-related information, such as product
+          identifiers, purchase status, and billing entitlement status, in order to unlock premium
+          features. FlightCal does not receive or store your full payment card number.
         </p>
 
         <h2>7. Permissions</h2>
-        <p>At the time of this policy, the Android app uses the following permissions:</p>
+        <p>At the time of this policy, the mobile apps use the following permissions:</p>
         <ul>
           <li><code>INTERNET</code>, to access weather, NOTAM, exchange-rate, and billing services.</li>
-          <li><code>com.android.vending.BILLING</code>, to support Google Play in-app purchases.</li>
+          <li>
+            <code>com.android.vending.BILLING</code>, to support Google Play in-app purchases
+            (Android only).
+          </li>
+          <li>
+            The iOS app does not request additional device permissions for in-app purchases;
+            purchases are handled by the App Store.
+          </li>
         </ul>
 
         <h2>8. Data Retention</h2>

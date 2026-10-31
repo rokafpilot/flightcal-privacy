@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlightCal 사용 설명서</title>
+    <meta
+      name="description"
+      content="SmartPilots FlightCal 사용 설명서: 키패드, E6-B 기능, 단위 변환, 환율, 계산기, 홀드오버, 날씨, 공항 정보, 사전, 설정, 타이머."
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0b0d10;
+        --card: #131820;
+        --text: #f4f7fb;
+        --muted: #b9c2cf;
+        --accent: #ffbf47;
+        --line: #2b3442;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f6f8fb;
+          --card: #ffffff;
+          --text: #101828;
+          --muted: #475467;
+          --accent: #c88900;
+          --line: #d7dee8;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo",
+          "Malgun Gothic", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+      }
+
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 32px 20px 56px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px 24px;
+      }
+
+      h1,
+      h2 {
+        line-height: 1.3;
+        margin: 0 0 14px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        margin-top: 34px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+        font-size: 1.22rem;
+      }
+
+      h3 {
+        margin: 22px 0 6px;
+        font-size: 1.02rem;
+      }
+
+      p,
+      li {
+        color: var(--text);
+        font-size: 1rem;
+      }
+
+      .muted,
+      .meta {
+        color: var(--muted);
+      }
+
+      .meta {
+        margin: 8px 0 0;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.95em;
+      }
+
+      kbd {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.84em;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 1px 6px;
+        background: rgba(127, 127, 127, 0.14);
+        white-space: nowrap;
+      }
+
+      .topnav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+        font-size: 0.9rem;
+      }
+
+      .topnav a {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px 12px;
+        text-decoration: none;
+      }
+
+      .toc {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 0;
+        margin: 18px 0 0;
+      }
+
+      .toc a {
+        display: inline-block;
+        font-size: 0.88rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px 11px;
+        text-decoration: none;
+      }
+
+      .shot {
+        margin: 22px 0;
+        text-align: center;
+      }
+
+      .shot img {
+        width: 100%;
+        max-width: 330px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+      }
+
+      .shot figcaption {
+        margin-top: 8px;
+        font-size: 0.86rem;
+        color: var(--muted);
+      }
+
+      .tablewrap {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0;
+        font-size: 0.94rem;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--accent);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .note {
+        border-left: 3px solid var(--accent);
+        padding: 6px 0 6px 14px;
+        margin: 14px 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .footer {
+        margin-top: 28px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="card">
+        <nav class="topnav">
+          <a href="support.html" lang="en">English</a>
+          <a href="index.html">개인정보 처리방침</a>
+        </nav>
+
+        <h1>FlightCal 사용 설명서</h1>
+        <p class="meta">
+          앱 버전 1.0.17
+          <br />
+          제공자: SmartPilots
+          <br />
+          최종 수정: 2026년 11월 1일
+        </p>
+
+        <p>
+          FlightCal은 조종사를 위한 휴대용 비행 컴퓨터입니다. 클래식 E6-B 계산기를 비롯해 단위
+          변환, 환율, 공학용 계산기, 홀드오버 타임, 항공 날씨, 공항 정보, 용어 사전, 스톱워치를
+          하나의 앱에 담았고, 모든 화면이 동일한 키패드로 동작합니다.
+        </p>
+
+        <ul class="toc">
+          <li><a href="#start">1. 시작하기</a></li>
+          <li><a href="#keys">2. 키패드</a></li>
+          <li><a href="#flt">3. E6-B</a></li>
+          <li><a href="#conv">4. CONV</a></li>
+          <li><a href="#curr">5. CURR</a></li>
+          <li><a href="#calc">6. CALC</a></li>
+          <li><a href="#hot">7. HOT</a></li>
+          <li><a href="#wx">8. WX</a></li>
+          <li><a href="#airport">9. AIRPORT</a></li>
+          <li><a href="#dict">10. DICT</a></li>
+          <li><a href="#set">11. SET</a></li>
+          <li><a href="#timer">12. STOP / TIMER</a></li>
+          <li><a href="#data">13. 데이터와 오프라인</a></li>
+        </ul>
+
+        <h2 id="start">1. 시작하기</h2>
+        <p>
+          모든 화면의 구성은 같습니다. 상단 왼쪽에 메뉴 이름, 오른쪽에 현재 UTC 시각, 가운데에
+          값 입력 줄, 하단에 키패드가 놓입니다. 선택된 줄이 강조되고 계산 결과는 초록색으로
+          표시됩니다.
+        </p>
+        <p>
+          헤더 아래 배너에는 앱 버전과 30일 체험 기간, 종료일이 표시됩니다. 예를 들어
+          <code>SMART FLIGHTCAL ver 1.0.17 · 30 DAY TRIAL · ENDS 2026.12.01</code> 와 같이
+          나오고, 오른쪽에 <code>D-30</code> 카운터가 함께 표시됩니다.
+        </p>
+
+        <h3>값 입력하기</h3>
+        <ul>
+          <li><kbd>▲</kbd> <kbd>▼</kbd> 로 커서를 옮기거나, 줄을 직접 탭합니다.</li>
+          <li>선택한 줄에서 <kbd>POWER</kbd> 를 누르거나 숫자를 입력하면 바로 편집이 시작됩니다.</li>
+          <li><kbd>C</kbd> 는 입력 전체 삭제, <kbd>⌫</kbd> 는 한 글자 삭제입니다.</li>
+          <li><kbd>+−</kbd> 는 부호 전환, <kbd>.</kbd> 는 소수점 입력입니다.</li>
+        </ul>
+        <p>
+          시간 줄은 콜론을 넣어 입력해도 되지만, 숫자만 입력해도 됩니다. 숫자는 오른쪽부터
+          해석되어 4자리는 <code>HHMM</code>, 2자리는 분으로 처리됩니다. 즉 <code>130</code> 은
+          <code>01:30</code>, <code>0130</code> 도 <code>01:30</code> 이 됩니다.
+        </p>
+        <div class="note">
+          체크 표시가 있는 메뉴는 마지막 입력값을 기억합니다. 다른 화면에 다녀와도 값을 다시 넣지
+          않아도 됩니다.
+        </div>
+
+        <h2 id="keys">2. 키패드</h2>
+        <p>
+          위쪽 세 줄은 항상 동일합니다. 아래 네 줄은 숫자 배열, QWERTY 배열, 한글 배열로 바뀌므로
+          공항 검색 같은 문자 입력도 키패드에서 바로 할 수 있습니다.
+        </p>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>키</th>
+                <th>기능</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><kbd>FLT</kbd></td>
+                <td>E6-B 메뉴. 14가지 비행 계산 기능이 있습니다.</td>
+              </tr>
+              <tr>
+                <td><kbd>CONV</kbd></td>
+                <td>단위 변환 메뉴. 11개 카테고리입니다.</td>
+              </tr>
+              <tr>
+                <td><kbd>CURR</kbd></td>
+                <td>환율 계산기와 12개 통화 프리셋.</td>
+              </tr>
+              <tr>
+                <td><kbd>CALC</kbd></td>
+                <td>계산기. STD, SCI, HMS, DUTY 4가지 모드입니다.</td>
+              </tr>
+              <tr>
+                <td><kbd>HOT</kbd></td>
+                <td>홀드오버 타임 계산기와 홀드오버 타이머.</td>
+              </tr>
+              <tr>
+                <td><kbd>WX</kbd> / <kbd>NOTAM</kbd></td>
+                <td>
+                  날씨 화면입니다. 두 이름이 함께 인쇄되어 있어, 한 번 누르면 WX가 열리고 다른
+                  화면에서 다시 누르면 곧바로 NOTAM으로 이동합니다.
+                </td>
+              </tr>
+              <tr>
+                <td><kbd>▲</kbd> <kbd>▼</kbd></td>
+                <td>
+                  줄 사이로 커서 이동, 목록 스크롤. 계산기에서는 각각 <kbd>MEM RCL</kbd>,
+                  <kbd>MEM +</kbd> 로 바뀝니다.
+                </td>
+              </tr>
+              <tr>
+                <td><kbd>POWER</kbd></td>
+                <td>
+                  선택한 줄 확정·편집, 메뉴 항목 열기, 타이머 시작/일시정지, 사전 항목 상세 보기.
+                </td>
+              </tr>
+              <tr>
+                <td><kbd>BACK</kbd></td>
+                <td>한 단계 위로 이동, 팝업 닫기, 상세 화면 빠져나가기.</td>
+              </tr>
+              <tr>
+                <td><kbd>CONV UNIT</kbd></td>
+                <td>
+                  선택한 줄의 단위를 바꿉니다. 예: ft ↔ m, °C ↔ °F, hPa ↔ inHg.
+                </td>
+              </tr>
+              <tr>
+                <td><kbd>AIRPORT</kbd></td>
+                <td>공항 정보. 시각, 일출·일몰, 날씨, 예보, 환율을 모아 보여 줍니다.</td>
+              </tr>
+              <tr>
+                <td><kbd>SET</kbd></td>
+                <td>설정.</td>
+              </tr>
+              <tr>
+                <td><kbd>DICT</kbd></td>
+                <td>항공 용어 사전. 어느 화면에서든 사전을 엽니다.</td>
+              </tr>
+              <tr>
+                <td><kbd>STOP</kbd> / <kbd>TIMER</kbd></td>
+                <td>스톱워치와 카운트다운 타이머. WX 키처럼 두 이름이 함께 표시됩니다.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          키 라벨은 상황에 따라 바뀝니다. 공학용 계산기에서는 키패드 전체가 함수키로 전환되고
+          <kbd>SET</kbd> 이 역함수용 <kbd>INV</kbd> 가 되며, 타이머에서는 <kbd>POWER</kbd> 가
+          <kbd>START / PAUSE</kbd>, <kbd>▼</kbd> 가 <kbd>RESET</kbd> 로 표시됩니다. 아래 각
+          장의 키 이름은 해당 화면에서 실제로 보이는 라벨을 기준으로 했습니다.
+        </p>
+
+        <h2 id="flt">3. E6-B (FLT)</h2>
+        <figure class="shot">
+          <img src="shots/flt.png" alt="FlightCal E6-B 메뉴" loading="lazy" />
+          <figcaption>E6-B 메뉴의 14개 기능. 각 항목 오른쪽에 마지막 결과가 표시됩니다.</figcaption>
+        </figure>
+        <p>
+          E6-B 메뉴에는 전통적인 비행 컴퓨터 기능이 모여 있습니다. <kbd>▲</kbd> <kbd>▼</kbd> 로
+          항목을 고르고 <kbd>POWER</kbd> 로 엽니다. 각 기능은 짧은 입력 줄 목록으로 되어 있고,
+          값을 채우면 결과가 초록색으로 나타납니다. 여러 모드가 있는 화면은 헤더 바로 아래에 모드
+          탭이 표시됩니다.
+        </p>
+
+        <h3>3.1 Density Altitude (밀도고도)</h3>
+        <p>
+          줄: <strong>Press Alt</strong>(기압고도), <strong>OAT</strong>(외기온도),
+          <strong>Dens Alt</strong>(밀도고도). 기압고도와 외기온도를 넣으면 밀도고도가 계산됩니다.
+          기압고도 줄에서 <kbd>CONV UNIT</kbd> 은 ft ↔ m, OAT 줄에서는 °C ↔ °F 를 전환합니다.
+        </p>
+
+        <h3>3.2 Distance (거리)</h3>
+        <p>
+          줄: <strong>Dist</strong>(NM), <strong>Dur</strong>(HMS), <strong>GS</strong>(KT). 세 값
+          중 두 개를 넣으면 나머지 하나가 계산됩니다. 거리, 소요시간, 지대속도 중 필요한 값을
+          구할 때 사용합니다. 소요시간은 시·분 단위로 입력합니다.
+        </p>
+
+        <h3>3.3 Endurance (항속시간)</h3>
+        <p>
+          연료 무게(<strong>Wt</strong>)와 연료 소모율(<strong>Rate</strong>)을 넣으면 항속시간이
+          결과로 나옵니다. 연료 화면의 세 탭 중 하나이므로, 메뉴로 돌아가지 않고 Fuel Burn이나
+          Fuel Rate로 바로 전환할 수 있습니다.
+        </p>
+
+        <h3>3.4 Fuel Consumption (연료 소모율)</h3>
+        <p>
+          같은 연료 화면의 Fuel Rate 모드입니다. 연료 무게와 소요시간을 넣으면 소모율이
+          <code>LB/HR</code> 로 계산되고, 설정에서 무게 단위를 kg으로 두면 <code>KG/HR</code> 로
+          표시됩니다.
+        </p>
+
+        <h3>3.5 Pressure Altitude (기압고도)</h3>
+        <p>
+          줄: <strong>Fld Elev</strong>(공항 표고), <strong>Altim</strong>(고도계 설정),
+          <strong>Press Alt</strong>(기압고도). 고도계 설정 기본값은 <code>1013.25</code> 입니다.
+          <kbd>CONV UNIT</kbd> 으로 고도계 설정은 hPa ↔ inHg, 표고는 ft ↔ m 로 바꿉니다.
+        </p>
+
+        <h3>3.6 Rate of Descent (강하율)</h3>
+        <p>
+          Climb / Descent 탭이 있고, 줄은 <strong>Rate</strong>, <strong>Alt Chg</strong>,
+          <strong>GS</strong>, <strong>Fuel</strong>, <strong>Time</strong>,
+          <strong>Dist</strong>, <strong>Burn</strong> 입니다. 단위는 FPM, FT, KT, LB·HR, HMS,
+          NM, LBS 입니다. 강하율, 고도 변화, 지대속도를 넣으면 소요시간, 거리, 소모 연료가 함께
+          계산됩니다.
+        </p>
+
+        <h3>3.7 Rate of Descent Mach (마하 강하율)</h3>
+        <p>
+          줄: <strong>Mach</strong>, <strong>Angle</strong>(기본 <code>3.0</code>),
+          <strong>OAT</strong>(기본 15 °C / 59 °F), <strong>RoD</strong>, <strong>TAS</strong>,
+          <strong>Spd Sound</strong>. 마하수와 강하각을 넣으면 강하율(FPM), TAS, 해당 고도의
+          음속(KT)이 계산됩니다. OAT 줄은 °C ↔ °F 로 전환됩니다.
+        </p>
+
+        <h3>3.8 Reserve Fuel (예비연료)</h3>
+        <p>
+          줄: <strong>Req Fuel</strong>(소요연료), <strong>Rsv %</strong>(예비율),
+          <strong>Alt Fuel</strong>(교체공항 연료), <strong>Hold Fuel</strong>(대기 연료),
+          <strong>Conting</strong>(불확실성 연료), <strong>Reserve</strong>(예비연료 합계),
+          <strong>Total Req</strong>(총 소요연료). 예비율 기본값은 15 %, 교체·대기 연료는 0 입니다.
+          불확실성 연료는 소요연료 × 예비율, 예비연료 합계는 불확실성 + 교체 + 대기, 총 소요연료는
+          소요연료 + 예비연료 합계입니다.
+        </p>
+
+        <h3>3.9 Speed (Airspeed) — 속도</h3>
+        <p>
+          탭 5개: <em>Planned TAS</em>, <em>Actual TAS</em>, <em>Required CAS</em>,
+          <em>Planned MACH#</em>, <em>Actual MACH#</em>. Planned TAS는 CAS, OAT, 기압고도를 넣어
+          TAS, TAT, Mach를 구합니다. Actual TAS는 OAT 대신 TAT를 사용하고 OAT를 결과로 보여
+          줍니다. Required CAS는 반대로 TAS에서 CAS를 역산합니다. 두 Mach 탭은 Mach와 온도만으로
+          계산합니다.
+        </p>
+
+        <h3>3.10 Time (ETA) — 시간</h3>
+        <p>
+          줄: <strong>Dist</strong>(NM), <strong>GS</strong>(KT), <strong>Time</strong>(HMS).
+          거리와 지대속도로 소요시간을 구하거나, 정해진 시간 안에 도착하기 위해 필요한 지대속도를
+          구할 때 사용합니다.
+        </p>
+
+        <h3>3.11 Top of Descent (강하개시점)</h3>
+        <p>
+          줄: <strong>Alt</strong>, <strong>Tgt</strong>, <strong>GS</strong>,
+          <strong>Path</strong>(기본 <code>3.0</code>°), <strong>Dist</strong>,
+          <strong>Time</strong>, <strong>ROD</strong>. 현재 고도, 목표 고도, 지대속도를 넣으면
+          강하를 시작할 거리와 시각, 필요한 강하율을 알려 줍니다.
+        </p>
+
+        <h3>3.12 Wind Component (바람 성분)</h3>
+        <p>
+          줄: <strong>RWY</strong>, <strong>WDIR</strong>, <strong>WSPD</strong>,
+          <strong>HEAD</strong>, <strong>TAIL</strong>, <strong>CROSS</strong>. 활주로 방위, 바람
+          방향, 풍속을 넣으면 정풍·배풍·측풍 성분이 계산되고, 측풍은 좌/우 방향까지 표시됩니다.
+        </p>
+
+        <h3>3.13 Fuel Uplift (주유량)</h3>
+        <p>
+          줄: <strong>Tot Req</strong>(총 소요), <strong>Current</strong>(현재 탑재),
+          <strong>Density</strong>(밀도, 기본 <code>6.7</code> lb/gal), <strong>Uplift</strong>,
+          <strong>Uplift Gal</strong>, <strong>Tot Onbd</strong>. 소요연료에서 현재 탑재량을 뺀
+          주유량을 계산하고, 주어진 밀도로 갤런 환산값과 주유 후 총 탑재량을 함께 보여 줍니다.
+        </p>
+
+        <h3>3.14 Cold Temp Correction (저온 고도 보정)</h3>
+        <p>
+          줄: <strong>Indicated</strong>(지시고도), <strong>Fld Elev</strong>(공항 표고),
+          <strong>OAT</strong>, <strong>ΔISA</strong>, <strong>Corr</strong>(보정량),
+          <strong>Corr Alt</strong>(보정고도). 저온에서 지시고도를 실제 고도로 보정해 주며, ISA
+          편차와 보정고도를 함께 표시합니다. 고도는 ft ↔ m, 온도는 °C ↔ °F 로 전환됩니다.
+        </p>
+
+        <h2 id="conv">4. CONV — 단위 변환</h2>
+        <figure class="shot">
+          <img src="shots/conv.png" alt="FlightCal 단위 변환 메뉴" loading="lazy" />
+          <figcaption>11개 변환 카테고리. 카테고리마다 마지막 결과를 기억합니다.</figcaption>
+        </figure>
+        <p>
+          카테고리를 고르면 변환 화면에 네 줄이 나옵니다. 입력값, <strong>SET UNIT</strong> 줄,
+          <strong>CONV UNIT</strong> 줄, <strong>Result</strong> 입니다. 단위 줄로 커서를 옮기고
+          <kbd>CONV UNIT</kbd> 또는 방향키, 탭으로 다른 단위를 선택하면 결과가 즉시 갱신됩니다.
+        </p>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>카테고리</th>
+                <th>선택 가능 단위</th>
+                <th>기본 조합</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Speed</td>
+                <td>m/s, kt, km/h, mph, fps, Mach</td>
+                <td>kt → m/s</td>
+              </tr>
+              <tr>
+                <td>Length</td>
+                <td>m, km, ft, NM, mi, in</td>
+                <td>NM → ft</td>
+              </tr>
+              <tr>
+                <td>Weight</td>
+                <td>kg, lb, ton (US)</td>
+                <td>lb → kg</td>
+              </tr>
+              <tr>
+                <td>Temperature</td>
+                <td>°C, °F, K</td>
+                <td>°F → °C</td>
+              </tr>
+              <tr>
+                <td>Volume</td>
+                <td>L, gal (US), gal (imp)</td>
+                <td>gal (US) → L</td>
+              </tr>
+              <tr>
+                <td>Pressure</td>
+                <td>hPa, inHg, mb, psi</td>
+                <td>inHg → hPa</td>
+              </tr>
+              <tr>
+                <td>Angle</td>
+                <td>°, rad, grad, %slope</td>
+                <td>° → %slope</td>
+              </tr>
+              <tr>
+                <td>Fuel Flow (P·K·G·L)</td>
+                <td>L/hr, gal/hr, lb/hr, kg/hr</td>
+                <td>gal/hr → lb/hr</td>
+              </tr>
+              <tr>
+                <td>Density / SG</td>
+                <td>kg/L, SG, lb/gal (US), lb/gal (imp)</td>
+                <td>lb/gal (US) → kg/L</td>
+              </tr>
+              <tr>
+                <td>Mach ↔ TAS</td>
+                <td>Mach, 온도, TAS를 한 화면에서 계산</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Time Zone</td>
+                <td>시간대 간 현지 시각 변환</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          온도, 무게, 압력, 거리의 기본 조합은 설정에서 고른 단위를 따릅니다. °C와 hPa를 쓰는
+          조종사라면 항상 익숙한 쪽에서 변환이 시작됩니다.
+        </p>
+
+        <h2 id="curr">5. CURR — 환율</h2>
+        <figure class="shot">
+          <img src="shots/curr.png" alt="FlightCal 환율 계산기" loading="lazy" />
+          <figcaption>
+            Amount, SET FROM, CONV TO, Result, Rate 다섯 줄. Rate 줄에 시세 상태가 함께 표시됩니다.
+          </figcaption>
+        </figure>
+        <p>
+          변환 화면은 다섯 줄입니다. <strong>Amount</strong>에 금액을 입력하고
+          <strong>SET FROM</strong>과 <strong>CONV TO</strong>를 정하면
+          <strong>Result</strong>가 초록색으로 표시됩니다. 두 통화 줄 사이의 교환 버튼을 누르면
+          방향이 뒤집히고, <strong>Rate</strong> 줄에는 <code>1 USD = 1334.5069 KRW</code> 처럼
+          현재 시세가 나옵니다.
+        </p>
+        <p>
+          통화 줄에서 <kbd>POWER</kbd> 를 누르면 검색 가능한 통화 목록이 열립니다. 양쪽에 같은
+          통화를 선택할 수는 없으므로 항상 유효한 조합이 유지됩니다.
+        </p>
+        <p>
+          Rate 줄을 탭하면 시세 차트가 열리고, <kbd>BACK</kbd> 이나 <kbd>CLR</kbd> 로 닫습니다.
+          Rate 줄 끝의 상태 표시로 시세의 출처를 알 수 있습니다.
+        </p>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>표시</th>
+                <th>의미</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>LIVE</code></td>
+                <td>1분 이내에 새로 받아온 시세입니다.</td>
+              </tr>
+              <tr>
+                <td><code>12m ago</code></td>
+                <td>최근에 받은 시세입니다. 분 단위로, 이후에는 시간·분으로 표시됩니다.</td>
+              </tr>
+              <tr>
+                <td><code>OFFLINE · CACHED 1D 3h</code></td>
+                <td>네트워크가 없어 저장된 마지막 시세를 사용 중이며, 그 경과 시간을 보여 줍니다.</td>
+              </tr>
+              <tr>
+                <td><code>DEFAULT · BUILT-IN</code></td>
+                <td>저장된 시세가 없어 앱에 내장된 기준 환율을 사용합니다.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          CURR 메뉴에는 자주 쓰는 통화 12개의 프리셋도 있습니다. 선택하면 해당 통화 조합으로
+          설정된 변환 화면이 바로 열립니다.
+        </p>
+
+        <h2 id="calc">6. CALC — 계산기</h2>
+        <figure class="shot">
+          <img src="shots/calc.png" alt="FlightCal 표준 계산기" loading="lazy" />
+          <figcaption>헤더 아래 STD, SCI, HMS, DUTY 탭. 결과 위에 계산 이력이 표시됩니다.</figcaption>
+        </figure>
+        <p>
+          네 가지 모드를 탭으로 제공하며, <kbd>CALC</kbd> 키를 누를 때마다 STD → SCI → HMS →
+          DUTY → 계산기 메뉴 순서로 순환합니다.
+        </p>
+
+        <h3>6.1 STD</h3>
+        <p>
+          사칙연산 계산기입니다. 결과 위에 최근 계산 4건이 이력으로 남습니다.
+          <kbd>POWER</kbd> 또는 <kbd>=</kbd> 로 계산합니다.
+        </p>
+
+        <h3>6.2 SCI</h3>
+        <p>
+          공학용 모드에서는 키패드 라벨이 함수키로 바뀝니다. <kbd>SET</kbd> 은 <kbd>INV</kbd> 가
+          되어 다음 함수를 역함수로 실행합니다.
+        </p>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>키</th>
+                <th>일반</th>
+                <th>INV 사용 시</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><kbd>sin</kbd></td><td>sin</td><td>sin⁻¹</td></tr>
+              <tr><td><kbd>cos</kbd></td><td>cos</td><td>cos⁻¹</td></tr>
+              <tr><td><kbd>tan</kbd></td><td>tan</td><td>tan⁻¹</td></tr>
+              <tr><td><kbd>ln</kbd></td><td>ln</td><td>eˣ</td></tr>
+              <tr><td><kbd>log</kbd></td><td>log</td><td>10ˣ</td></tr>
+              <tr><td><kbd>x²</kbd></td><td>x²</td><td>—</td></tr>
+              <tr><td><kbd>1/x</kbd></td><td>1/x</td><td>—</td></tr>
+              <tr><td><kbd>π</kbd></td><td>π</td><td>—</td></tr>
+              <tr><td><kbd>eˣ</kbd></td><td>eˣ</td><td>—</td></tr>
+              <tr><td><kbd>xʸ</kbd></td><td>거듭제곱</td><td>—</td></tr>
+              <tr><td><kbd>√x</kbd></td><td>제곱근</td><td>—</td></tr>
+              <tr><td><kbd>!</kbd></td><td>팩토리얼</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          <kbd>▲</kbd> 은 메모리 값을 불러오고 <kbd>▼</kbd> 는 현재 결과를 메모리에 더합니다.
+          <kbd>▲</kbd> 을 연속 두 번 누르면 메모리가 지워집니다.
+        </p>
+
+        <h3>6.3 HMS</h3>
+        <p>
+          시간 전용 계산기입니다. 콜론 키로 시·분·초를 입력하고 일반 숫자로 곱하거나 나누면 결과가
+          다시 시·분·초로 나옵니다. 사전 키는 현재 입력을 지우고, 메모리 키는 STD와 동일하게
+          동작합니다.
+        </p>
+
+        <h3>6.4 DUTY</h3>
+        <figure class="shot">
+          <img src="shots/duty.png" alt="FlightCal 근무시간 계산기" loading="lazy" />
+          <figcaption>총 근무시간을 1/2, 1/4, 1/3, 2/3 로 나눠 세 가지 형식으로 동시에 보여 줍니다.</figcaption>
+        </figure>
+        <p>
+          총 근무시간을 입력하면 자주 쓰는 비율이 한 번에 계산됩니다. <strong>1/2 Half</strong>,
+          <strong>1/4 Quarter</strong>, <strong>1/3 Third</strong>, <strong>2/3 2Third</strong>
+          입니다. 각 줄은 같은 값을 시·분, 총 분, 소수 시간 세 가지로 함께 표시합니다. 예를 들어
+          <code>04:30 270M 4.5H</code> 와 같습니다.
+        </p>
+
+        <h2 id="hot">7. HOT — 홀드오버 타임</h2>
+        <figure class="shot">
+          <img src="shots/hot.png" alt="FlightCal 홀드오버 타임 계산기" loading="lazy" />
+          <figcaption>일곱 줄로 조건을 지정하고, 홀드오버 타임은 초록색 결과로 표시됩니다.</figcaption>
+        </figure>
+        <p>
+          줄: <strong>Time of Day</strong>, <strong>Weather</strong>,
+          <strong>OAT (Outside)</strong>, <strong>Visibility</strong>, <strong>Fluid</strong>,
+          <strong>Mixture Ratio</strong>, <strong>Holdover HOT</strong>.
+        </p>
+        <ul>
+          <li>
+            <strong>Time of Day</strong>는 <kbd>CONV UNIT</kbd> 또는 방향키로 DAY / NIGHT를
+            전환합니다.
+          </li>
+          <li>
+            <strong>Weather</strong>, <strong>Visibility</strong>, <strong>Fluid</strong>,
+            <strong>Mixture Ratio</strong>는 <kbd>CONV UNIT</kbd> 또는 방향키로 항목을 순환하고,
+            탭하면 전체 목록이 열립니다.
+          </li>
+          <li><strong>OAT</strong>는 직접 입력하며 설정의 온도 단위를 따릅니다.</li>
+        </ul>
+        <p>
+          결과 줄에는 홀드오버 타임이 분 단위로 표시됩니다. 외기온도가 영상이면 제빙이 필요 없다는
+          안내가 나오고, 유체의 사용 온도 범위보다 낮으면 시간 대신 사용 불가로 표시됩니다.
+        </p>
+        <p>
+          결과 줄에서 <kbd>POWER</kbd> 를 누르거나 탭하면 계산된 시간이 미리 입력된
+          <strong>HOT Timer</strong>가 열립니다. 타이머 화면에는 <em>START TIME</em>과
+          <em>Time Remaining</em>이 표시되고 시작하면 카운트다운됩니다. <kbd>MEM</kbd> 또는
+          <kbd>=</kbd> 가 시작·리셋을 전환하고 <kbd>CLR</kbd> 로 초기화합니다.
+        </p>
+
+        <h2 id="wx">8. WX — 날씨</h2>
+        <figure class="shot">
+          <img src="shots/wx.png" alt="FlightCal METAR, TAF 화면" loading="lazy" />
+          <figcaption>METAR 원문과 해독 카드, 이어서 예보 구간별로 나눈 TAF가 표시됩니다.</figcaption>
+        </figure>
+        <p>
+          4자리 ICAO 코드를 입력하면 날씨가 자동으로 조회됩니다. <kbd>CONV UNIT</kbd> 키로 세
+          모드를 순환합니다: <strong>ATIS</strong> → <strong>METAR/TAF</strong> →
+          <strong>NOTAM</strong>. WX 키에는 NOTAM 라벨이 함께 있어, <kbd>NOTAM</kbd>을 누르면 곧바로
+          NOTAM으로 전환되고 다시 누르면 이전 모드로 돌아옵니다.
+        </p>
+        <ul>
+          <li>
+            <strong>ATIS</strong>는 지원 공항의 현재 ATIS 전문을 보여 줍니다. 해당 공항에 ATIS가
+            없으면 METAR/TAF로 자동 전환됩니다.
+          </li>
+          <li>
+            <strong>METAR/TAF</strong>는 원문과 비행기상 구분 배지, 그리고 바람, 시정, 현재 날씨,
+            구름, 기온, 기압(QNH)을 정리한 카드를 보여 줍니다. TAF는 초기, 일시(TEMPO),
+            변화(BECMG) 구간으로 나누어 표시됩니다.
+          </li>
+          <li>
+            <strong>NOTAM</strong>은 ALL, RWY, TWY, NAV, AIRSPACE, COM, APRON, FDC 필터와 Q코드
+            주제 필터를 제공합니다. 해독 토글을 켜면 원문이 쉬운 설명으로 바뀝니다.
+          </li>
+        </ul>
+        <p>
+          최근 조회 결과는 캐시되므로, 마지막으로 본 날씨와 NOTAM은 연결 없이도 확인할 수 있습니다.
+        </p>
+
+        <h2 id="airport">9. AIRPORT — 공항 정보</h2>
+        <figure class="shot">
+          <img src="shots/world.png" alt="FlightCal 공항 정보 화면" loading="lazy" />
+          <figcaption>공항 시각, 일출·일몰, 현재 날씨와 이어지는 상세 섹션.</figcaption>
+        </figure>
+        <p>
+          ICAO 또는 IATA 코드로 검색합니다. <strong>BACK/HOME</strong> 버튼은 이전에 열었던
+          공항으로 돌아가고, <strong>REFRESH</strong>는 로딩 표시와 함께 데이터를 다시 불러옵니다.
+        </p>
+        <p>한 공항 페이지에 다음 정보가 모입니다.</p>
+        <ul>
+          <li><strong>TIME</strong> — 공항 현지 시각, 내 현지 시각, 두 시각의 차이.</li>
+          <li><strong>Sunrise / Sunset</strong> — 당일 일조 구간 막대와 함께 표시.</li>
+          <li><strong>Weather now</strong> — 풍속과 풍향을 나침반에 표시.</li>
+          <li><strong>Feels like</strong>, <strong>UV index</strong>, <strong>Precipitation</strong>, <strong>Moon</strong>.</li>
+          <li><strong>7-Day</strong> 예보, <strong>METAR</strong>, <strong>TAF</strong>.</li>
+          <li><strong>FX</strong> — 현지 통화와 내 기준 통화의 환율.</li>
+        </ul>
+
+        <h2 id="dict">10. DICT — 항공 용어 사전</h2>
+        <figure class="shot">
+          <img src="shots/dict.png" alt="FlightCal 항공 용어 사전" loading="lazy" />
+          <figcaption>조종사·관제사 용어 2,111개를 4개 분류로 제공하며, 입력하는 대로 검색됩니다.</figcaption>
+        </figure>
+        <p>
+          사전에는 조종사와 관제사를 위한 용어 2,111개가 <strong>NOTAM</strong>,
+          <strong>WEATHER</strong>, <strong>PILOT / ATC</strong>, <strong>AIP · ICAO</strong>
+          네 분류로 정리되어 있습니다. 용어의 일부만 입력해도 검색되며 목록이 실시간으로
+          좁혀집니다. <kbd>▲</kbd> <kbd>▼</kbd> 로 A–Z 전체 목록을 페이지 단위로 넘겨 볼 수 있고,
+          복합어 입력을 위해 하이픈과 슬래시도 입력할 수 있습니다.
+        </p>
+        <p>
+          항목에서 <kbd>POWER</kbd> 를 누르면 전체 설명이 열리고 <kbd>BACK</kbd> 으로 목록으로
+          돌아옵니다. <kbd>DICT</kbd> 키는 어느 화면에서든 사전을 엽니다.
+        </p>
+
+        <h2 id="set">11. SET — 설정</h2>
+        <figure class="shot">
+          <img src="shots/set.png" alt="FlightCal 설정 화면" loading="lazy" />
+          <figcaption>설정은 화면 아래로 이어지며 ▲ ▼ 로 이동합니다.</figcaption>
+        </figure>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>설정</th>
+                <th>옵션 / 의미</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Theme</td>
+                <td>Auto (System), Light, Dark, Dusk, Night.</td>
+              </tr>
+              <tr><td>Temperature Unit</td><td>Celsius (°C) 또는 Fahrenheit (°F).</td></tr>
+              <tr><td>Weight Unit</td><td>Kilograms (kg) 또는 Pounds (lbs).</td></tr>
+              <tr><td>Pressure Unit</td><td>Hectopascal (hPa) 또는 Inches Hg (inHg).</td></tr>
+              <tr><td>Altitude Unit</td><td>Feet (ft) 또는 Meters (m).</td></tr>
+              <tr><td>Key Haptic</td><td>키 입력 진동 피드백 켜기/끄기.</td></tr>
+              <tr>
+                <td>Home Currency</td>
+                <td>환율 계산기와 공항 FX 섹션에서 기준이 되는 통화.</td>
+              </tr>
+              <tr><td>Base Airport</td><td>기본 공항 코드.</td></tr>
+              <tr>
+                <td>Startup Screen</td>
+                <td>
+                  앱을 켤 때 표시할 화면: E6-B, WX, AIRPORT, DUTY, CALC, CONV, CURR, HOT, DICT.
+                </td>
+              </tr>
+              <tr><td>Reset</td><td>설정을 기본값으로 되돌립니다.</td></tr>
+              <tr><td>Version</td><td>설치된 앱 버전.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          단위 설정은 앱 전체에 적용됩니다. E6-B 결과, 연료 무게, 고도계 설정, 홀드오버 온도 모두
+          이 설정을 따릅니다.
+        </p>
+
+        <h2 id="timer">12. STOP / TIMER</h2>
+        <figure class="shot">
+          <img src="shots/timer.png" alt="FlightCal 스톱워치 화면" loading="lazy" />
+          <figcaption>크로노그래프 다이얼과 디지털 표시. 키패드는 START / PAUSE 와 RESET 으로 바뀝니다.</figcaption>
+        </figure>
+        <p>
+          타이머 화면에는 두 가지 모드가 있습니다. <kbd>CONV UNIT</kbd> 키로
+          <strong>STOPWATCH</strong>와 <strong>COUNTDOWN</strong>을 전환합니다.
+        </p>
+        <ul>
+          <li><kbd>POWER</kbd> 또는 <kbd>=</kbd> 로 시작·일시정지합니다.</li>
+          <li><kbd>CLR</kbd> 또는 <kbd>▼</kbd> 로 0으로 리셋합니다.</li>
+          <li><kbd>▲</kbd> 는 카운트다운 시간을 1분 늘립니다.</li>
+          <li>카운트다운 모드에서는 <code>hhmmss</code> 6자리로 시간을 입력할 수 있고, 최대 99:59:59입니다.</li>
+        </ul>
+        <p>
+          아날로그 크로노그래프 다이얼과 디지털 표시가 함께 나와 조종석에서 한눈에 확인할 수
+          있습니다.
+        </p>
+
+        <h2 id="data">13. 데이터, 캐시, 체험판</h2>
+        <ul>
+          <li>
+            설정과 마지막 입력값, 캐시된 날씨·NOTAM·환율은 기기에 저장되므로, 가능한 범위에서는
+            연결 없이도 앱이 동작합니다.
+          </li>
+          <li>
+            날씨, NOTAM, 환율은 새로 고칠 때 네트워크가 필요합니다. 오프라인이면 마지막 캐시 값을
+            표시하고 그 상태를 함께 알려 줍니다.
+          </li>
+          <li>
+            FlightCal은 30일 체험판으로 동작하며, 이후 App Store 또는 Google Play를 통해 프리미엄
+            기능을 사용할 수 있습니다. 결제 처리 방식은
+            <a href="index.html">개인정보 처리방침</a>에 설명되어 있습니다.
+          </li>
+        </ul>
+
+        <h2>문의</h2>
+        <p>
+          질문, 오류 신고, 기능 제안:
+          <br />
+          SmartPilots
+          <br />
+          이메일: <a href="mailto:smartpilot@smartpilot.co.kr">smartpilot@smartpilot.co.kr</a>
+          <br />
+          <a href="support.html" lang="en">View the English guide</a>
+        </p>
+
+        <div class="footer muted">
+          FlightCal은 운항 지원 도구이며, 승인된 비행 계획, 운항 통제, 회사 절차를 대체하지
+          않습니다.
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlightCal User Guide</title>
+    <meta
+      name="description"
+      content="User guide for FlightCal by SmartPilots: keypad, E6-B functions, unit conversion, currency, calculator, holdover, weather, airport, dictionary, settings and timer."
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0b0d10;
+        --card: #131820;
+        --text: #f4f7fb;
+        --muted: #b9c2cf;
+        --accent: #ffbf47;
+        --line: #2b3442;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f6f8fb;
+          --card: #ffffff;
+          --text: #101828;
+          --muted: #475467;
+          --accent: #c88900;
+          --line: #d7dee8;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+      }
+
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 32px 20px 56px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px 24px;
+      }
+
+      h1,
+      h2 {
+        line-height: 1.25;
+        margin: 0 0 14px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        margin-top: 34px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+        font-size: 1.22rem;
+      }
+
+      h3 {
+        margin: 22px 0 6px;
+        font-size: 1.02rem;
+      }
+
+      p,
+      li {
+        color: var(--text);
+        font-size: 1rem;
+      }
+
+      .muted,
+      .meta {
+        color: var(--muted);
+      }
+
+      .meta {
+        margin: 8px 0 0;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.95em;
+      }
+
+      kbd {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.84em;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 1px 6px;
+        background: rgba(127, 127, 127, 0.14);
+        white-space: nowrap;
+      }
+
+      .topnav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+        font-size: 0.9rem;
+      }
+
+      .topnav a {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px 12px;
+        text-decoration: none;
+      }
+
+      .toc {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 0;
+        margin: 18px 0 0;
+      }
+
+      .toc a {
+        display: inline-block;
+        font-size: 0.88rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px 11px;
+        text-decoration: none;
+      }
+
+      .shot {
+        margin: 22px 0;
+        text-align: center;
+      }
+
+      .shot img {
+        width: 100%;
+        max-width: 330px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+      }
+
+      .shot figcaption {
+        margin-top: 8px;
+        font-size: 0.86rem;
+        color: var(--muted);
+      }
+
+      .tablewrap {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0;
+        font-size: 0.94rem;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--accent);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .note {
+        border-left: 3px solid var(--accent);
+        padding: 6px 0 6px 14px;
+        margin: 14px 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .footer {
+        margin-top: 28px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="card">
+        <nav class="topnav">
+          <a href="support.ko.html" lang="ko">한국어</a>
+          <a href="index.html">Privacy Policy</a>
+        </nav>
+
+        <h1>FlightCal User Guide</h1>
+        <p class="meta">
+          App version 1.0.17
+          <br />
+          Service provider: SmartPilots
+          <br />
+          Updated: November 1, 2026
+        </p>
+
+        <p>
+          FlightCal is a pocket flight computer for pilots. It reproduces the classic E6-B style
+          calculator together with unit conversion, currency conversion, a scientific calculator,
+          holdover time, aviation weather, airport information, a dictionary and a stopwatch — all
+          driven by the same physical keypad on every screen.
+        </p>
+
+        <ul class="toc">
+          <li><a href="#start">1. Getting Started</a></li>
+          <li><a href="#keys">2. Keypad</a></li>
+          <li><a href="#flt">3. E6-B</a></li>
+          <li><a href="#conv">4. CONV</a></li>
+          <li><a href="#curr">5. CURR</a></li>
+          <li><a href="#calc">6. CALC</a></li>
+          <li><a href="#hot">7. HOT</a></li>
+          <li><a href="#wx">8. WX</a></li>
+          <li><a href="#airport">9. AIRPORT</a></li>
+          <li><a href="#dict">10. DICT</a></li>
+          <li><a href="#set">11. SET</a></li>
+          <li><a href="#timer">12. STOP / TIMER</a></li>
+          <li><a href="#data">13. Data &amp; Offline</a></li>
+        </ul>
+
+        <h2 id="start">1. Getting Started</h2>
+        <p>
+          Every screen shares the same layout: the menu name at the top left, the current UTC clock
+          at the top right, a list of value lines in the middle, and the keypad at the bottom. The
+          active line is highlighted, and results are shown in green.
+        </p>
+        <p>
+          The trial banner under the header shows the app version, the 30-day trial period and the
+          end date, for example
+          <code>SMART FLIGHTCAL ver 1.0.17 · 30 DAY TRIAL · ENDS 2026.12.01</code>, with a
+          <code>D-30</code> counter on the right.
+        </p>
+
+        <h3>Entering a value</h3>
+        <ul>
+          <li>Move the cursor with <kbd>▲</kbd> <kbd>▼</kbd>, or tap the line directly.</li>
+          <li>Press <kbd>POWER</kbd> or simply type digits to start editing the selected line.</li>
+          <li><kbd>C</kbd> clears the current entry, <kbd>⌫</kbd> deletes one character.</li>
+          <li><kbd>+−</kbd> changes the sign, <kbd>.</kbd> enters a decimal point.</li>
+        </ul>
+        <p>
+          Time lines accept a colon, but you can also just type digits. Digits are read from the
+          right: four digits are read as <code>HHMM</code> and two digits as minutes. So typing
+          <code>130</code> gives <code>01:30</code>, and <code>0130</code> gives <code>01:30</code>
+          as well.
+        </p>
+        <div class="note">
+          Menus marked with a check mark keep their last input, so you can leave a screen and come
+          back without retyping values.
+        </div>
+
+        <h2 id="keys">2. Keypad</h2>
+        <p>
+          The top three rows are always the same. The lower four rows switch between numeric,
+          QWERTY and Korean layouts, so text fields such as the airport search can be typed
+          directly.
+        </p>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Function</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><kbd>FLT</kbd></td>
+                <td>E6-B menu with 14 flight computer functions.</td>
+              </tr>
+              <tr>
+                <td><kbd>CONV</kbd></td>
+                <td>Unit conversion menu with 11 categories.</td>
+              </tr>
+              <tr>
+                <td><kbd>CURR</kbd></td>
+                <td>Currency converter and 12 currency presets.</td>
+              </tr>
+              <tr>
+                <td><kbd>CALC</kbd></td>
+                <td>Calculator: STD, SCI, HMS and DUTY.</td>
+              </tr>
+              <tr>
+                <td><kbd>HOT</kbd></td>
+                <td>Holdover time calculator and holdover timer.</td>
+              </tr>
+              <tr>
+                <td><kbd>WX</kbd> / <kbd>NOTAM</kbd></td>
+                <td>
+                  Weather screen. The key is labelled both ways: press it once to open WX, press it
+                  again from another screen to jump straight to NOTAM.
+                </td>
+              </tr>
+              <tr>
+                <td><kbd>▲</kbd> <kbd>▼</kbd></td>
+                <td>
+                  Move the cursor between lines or scroll a list. In the calculator they become
+                  <kbd>MEM RCL</kbd> and <kbd>MEM +</kbd>.
+                </td>
+              </tr>
+              <tr>
+                <td><kbd>POWER</kbd></td>
+                <td>
+                  Confirm / edit the selected line, open the selected menu item, start and pause the
+                  timer, or open a dictionary entry.
+                </td>
+              </tr>
+              <tr>
+                <td><kbd>BACK</kbd></td>
+                <td>Go up one level, close a popup, or leave a detail view.</td>
+              </tr>
+              <tr>
+                <td><kbd>CONV UNIT</kbd></td>
+                <td>
+                  Switch the unit of the active line, for example ft ↔ m, °C ↔ °F or hPa ↔ inHg.
+                </td>
+              </tr>
+              <tr>
+                <td><kbd>AIRPORT</kbd></td>
+                <td>Airport information: time, sun, weather, forecasts and currency.</td>
+              </tr>
+              <tr>
+                <td><kbd>SET</kbd></td>
+                <td>Settings.</td>
+              </tr>
+              <tr>
+                <td><kbd>DICT</kbd></td>
+                <td>Aviation dictionary. It opens the dictionary from any screen.</td>
+              </tr>
+              <tr>
+                <td><kbd>STOP</kbd> / <kbd>TIMER</kbd></td>
+                <td>Stopwatch and countdown timer, with a dual label like the WX key.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Key labels are context sensitive. Inside the scientific calculator the whole keypad turns
+          into function keys, <kbd>SET</kbd> becomes <kbd>INV</kbd> for inverse functions, and in
+          the timer <kbd>POWER</kbd> becomes <kbd>START / PAUSE</kbd> while <kbd>▼</kbd> becomes
+          <kbd>RESET</kbd>. The printed labels in each section below reflect what you see on that
+          screen.
+        </p>
+
+        <h2 id="flt">3. E6-B (FLT)</h2>
+        <figure class="shot">
+          <img src="shots/flt.png" alt="FlightCal E6-B menu" loading="lazy" />
+          <figcaption>
+            The E6-B menu lists 14 functions. Every item shows its last result on the right.
+          </figcaption>
+        </figure>
+        <p>
+          The E6-B menu holds the classic flight computer functions. Select an item with
+          <kbd>▲</kbd> <kbd>▼</kbd> and press <kbd>POWER</kbd> to open it. Each function is a short
+          list of lines: fill the inputs and the result appears in green. When a screen offers
+          several modes, the mode tabs are shown just under the header.
+        </p>
+
+        <h3>3.1 Density Altitude</h3>
+        <p>
+          Lines: <strong>Press Alt</strong>, <strong>OAT</strong>, <strong>Dens Alt</strong>.
+          Enter pressure altitude and outside air temperature and the density altitude is computed.
+          On the pressure altitude line <kbd>CONV UNIT</kbd> switches ft ↔ m, and on the OAT line it
+          switches °C ↔ °F.
+        </p>
+
+        <h3>3.2 Distance</h3>
+        <p>
+          Lines: <strong>Dist</strong> (NM), <strong>Dur</strong> (HMS), <strong>GS</strong> (KT).
+          Enter any two values to solve the third — distance, duration or ground speed. The
+          duration line accepts time in hours and minutes.
+        </p>
+
+        <h3>3.3 Endurance</h3>
+        <p>
+          Lines: <strong>Wt</strong> (fuel weight) and <strong>Rate</strong> (fuel flow), with the
+          endurance time as the result. The endurance mode is one of the three tabs of the fuel
+          screen, so you can switch to Fuel Burn or Fuel Rate without going back to the menu.
+        </p>
+
+        <h3>3.4 Fuel Consumption</h3>
+        <p>
+          This is the Fuel Rate mode of the same screen. Enter fuel weight and duration and the
+          consumption rate is returned in <code>LB/HR</code>, or <code>KG/HR</code> when the weight
+          unit is set to kilograms in Settings.
+        </p>
+
+        <h3>3.5 Pressure Altitude</h3>
+        <p>
+          Lines: <strong>Fld Elev</strong>, <strong>Altim</strong>, <strong>Press Alt</strong>.
+          The altimeter setting defaults to <code>1013.25</code>. <kbd>CONV UNIT</kbd> switches the
+          altimeter between hPa and inHg, and the elevation between ft and m.
+        </p>
+
+        <h3>3.6 Rate of Descent</h3>
+        <p>
+          The climb / descent screen has Climb and Descent tabs and the lines
+          <strong>Rate</strong>, <strong>Alt Chg</strong>, <strong>GS</strong>,
+          <strong>Fuel</strong>, <strong>Time</strong>, <strong>Dist</strong>,
+          <strong>Burn</strong>. Units are FPM, FT, KT, LB·HR, HMS, NM and LBS. Fill the rate, the
+          altitude change and the ground speed, and the time, distance and fuel burned are solved
+          together.
+        </p>
+
+        <h3>3.7 Rate of Descent Mach</h3>
+        <p>
+          Lines: <strong>Mach</strong>, <strong>Angle</strong> (default <code>3.0</code>),
+          <strong>OAT</strong> (default 15 °C / 59 °F), <strong>RoD</strong>,
+          <strong>TAS</strong>, <strong>Spd Sound</strong>. Given a Mach number and a descent angle
+          it returns the rate of descent in FPM, the TAS and the local speed of sound in knots. The
+          OAT line switches between °C and °F.
+        </p>
+
+        <h3>3.8 Reserve Fuel</h3>
+        <p>
+          Lines: <strong>Req Fuel</strong>, <strong>Rsv %</strong>, <strong>Alt Fuel</strong>,
+          <strong>Hold Fuel</strong>, <strong>Conting</strong>, <strong>Reserve</strong>,
+          <strong>Total Req</strong>. The reserve percentage defaults to 15 %, alternate and holding
+          fuel to 0. Contingency is the trip fuel times the reserve percentage; reserve is
+          contingency plus alternate plus holding fuel; total required is trip fuel plus reserve.
+        </p>
+
+        <h3>3.9 Speed (Airspeed)</h3>
+        <p>
+          Five tabs: <em>Planned TAS</em>, <em>Actual TAS</em>, <em>Required CAS</em>,
+          <em>Planned MACH#</em>, <em>Actual MACH#</em>. Planned TAS takes CAS, OAT and pressure
+          altitude and returns TAS, TAT and Mach. Actual TAS uses TAT instead of OAT and returns
+          OAT. Required CAS reverses the calculation, giving CAS from TAS. The two Mach tabs work
+          with Mach and temperature only.
+        </p>
+
+        <h3>3.10 Time (ETA)</h3>
+        <p>
+          Lines: <strong>Dist</strong> (NM), <strong>GS</strong> (KT), <strong>Time</strong> (HMS).
+          A quick time en route calculation from distance and ground speed, or the ground speed
+          required to cover a distance in a given time.
+        </p>
+
+        <h3>3.11 Top of Descent</h3>
+        <p>
+          Lines: <strong>Alt</strong>, <strong>Tgt</strong>, <strong>GS</strong>,
+          <strong>Path</strong> (default <code>3.0</code>°), <strong>Dist</strong>,
+          <strong>Time</strong>, <strong>ROD</strong>. Enter the current altitude, the target
+          altitude and the ground speed to get the distance and time to start down, plus the
+          required rate of descent.
+        </p>
+
+        <h3>3.12 Wind Component</h3>
+        <p>
+          Lines: <strong>RWY</strong>, <strong>WDIR</strong>, <strong>WSPD</strong>,
+          <strong>HEAD</strong>, <strong>TAIL</strong>, <strong>CROSS</strong>. Enter the runway
+          direction, wind direction and wind speed and the headwind, tailwind and crosswind
+          components are shown; the crosswind is marked left or right.
+        </p>
+
+        <h3>3.13 Fuel Uplift</h3>
+        <p>
+          Lines: <strong>Tot Req</strong>, <strong>Current</strong>, <strong>Density</strong>,
+          <strong>Uplift</strong>, <strong>Uplift Gal</strong>, <strong>Tot Onbd</strong>. Density
+          defaults to <code>6.7</code> lb/gal. The uplift is the required fuel minus the fuel
+          already on board, converted to gallons at the given density, and the total on board after
+          uplifting is shown as well.
+        </p>
+
+        <h3>3.14 Cold Temp Correction</h3>
+        <p>
+          Lines: <strong>Indicated</strong>, <strong>Fld Elev</strong>, <strong>OAT</strong>,
+          <strong>ΔISA</strong>, <strong>Corr</strong>, <strong>Corr Alt</strong>. It applies the
+          cold temperature altitude correction to an indicated altitude for a given field elevation
+          and OAT, and displays the ISA deviation and the corrected altitude. Altitudes switch
+          between ft and m, and the temperature between °C and °F.
+        </p>
+
+        <h2 id="conv">4. CONV — Unit Conversion</h2>
+        <figure class="shot">
+          <img src="shots/conv.png" alt="FlightCal unit conversion menu" loading="lazy" />
+          <figcaption>Eleven conversion categories, each remembering its last result.</figcaption>
+        </figure>
+        <p>
+          Choose a category and the conversion screen shows four lines: the value you type, the
+          <strong>SET UNIT</strong> line, the <strong>CONV UNIT</strong> line and the
+          <strong>Result</strong>. Move the cursor to a unit line and use <kbd>CONV UNIT</kbd>, the
+          arrow keys or a tap to pick another unit; the result updates immediately.
+        </p>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Units available</th>
+                <th>Default pair</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Speed</td>
+                <td>m/s, kt, km/h, mph, fps, Mach</td>
+                <td>kt → m/s</td>
+              </tr>
+              <tr>
+                <td>Length</td>
+                <td>m, km, ft, NM, mi, in</td>
+                <td>NM → ft</td>
+              </tr>
+              <tr>
+                <td>Weight</td>
+                <td>kg, lb, ton (US)</td>
+                <td>lb → kg</td>
+              </tr>
+              <tr>
+                <td>Temperature</td>
+                <td>°C, °F, K</td>
+                <td>°F → °C</td>
+              </tr>
+              <tr>
+                <td>Volume</td>
+                <td>L, gal (US), gal (imp)</td>
+                <td>gal (US) → L</td>
+              </tr>
+              <tr>
+                <td>Pressure</td>
+                <td>hPa, inHg, mb, psi</td>
+                <td>inHg → hPa</td>
+              </tr>
+              <tr>
+                <td>Angle</td>
+                <td>°, rad, grad, %slope</td>
+                <td>° → %slope</td>
+              </tr>
+              <tr>
+                <td>Fuel Flow (P·K·G·L)</td>
+                <td>L/hr, gal/hr, lb/hr, kg/hr</td>
+                <td>gal/hr → lb/hr</td>
+              </tr>
+              <tr>
+                <td>Density / SG</td>
+                <td>kg/L, SG, lb/gal (US), lb/gal (imp)</td>
+                <td>lb/gal (US) → kg/L</td>
+              </tr>
+              <tr>
+                <td>Mach ↔ TAS</td>
+                <td>Mach, temperature and TAS in one screen</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Time Zone</td>
+                <td>Local time conversion between zones</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          The default pair for temperature, weight, pressure and length follows the units chosen in
+          Settings, so a pilot working in °C and hPa always starts from the familiar side.
+        </p>
+
+        <h2 id="curr">5. CURR — Currency</h2>
+        <figure class="shot">
+          <img src="shots/curr.png" alt="FlightCal currency converter" loading="lazy" />
+          <figcaption>
+            Amount, SET FROM, CONV TO, Result and Rate — the rate line shows how fresh the quote is.
+          </figcaption>
+        </figure>
+        <p>
+          The converter screen has five lines. Type the <strong>Amount</strong>, set
+          <strong>SET FROM</strong> and <strong>CONV TO</strong>, and the converted
+          <strong>Result</strong> appears in green. The swap button between the two currency lines
+          reverses the pair, and the <strong>Rate</strong> line shows the live quote, for example
+          <code>1 USD = 1334.5069 KRW</code>.
+        </p>
+        <p>
+          Press <kbd>POWER</kbd> on a currency line to open the searchable currency list. Selecting
+          the same currency on both sides is not allowed, so the app always keeps a valid pair.
+        </p>
+        <p>
+          Tap the rate line to open the rate chart; <kbd>BACK</kbd> or <kbd>CLR</kbd> closes it.
+          The status at the end of the rate line tells you where the number came from:
+        </p>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>LIVE</code></td>
+                <td>A fresh quote fetched less than a minute ago.</td>
+              </tr>
+              <tr>
+                <td><code>12m ago</code></td>
+                <td>Fetched recently; shown in minutes, then hours and minutes.</td>
+              </tr>
+              <tr>
+                <td><code>OFFLINE · CACHED 1D 3h</code></td>
+                <td>
+                  The network is unavailable, so the last stored rate is used and its age is shown.
+                </td>
+              </tr>
+              <tr>
+                <td><code>DEFAULT · BUILT-IN</code></td>
+                <td>No stored rate yet; the built-in reference rate is used.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          The CURR menu also lists 12 frequently used currency presets, which open the converter
+          already set to that pair.
+        </p>
+
+        <h2 id="calc">6. CALC — Calculator</h2>
+        <figure class="shot">
+          <img src="shots/calc.png" alt="FlightCal standard calculator" loading="lazy" />
+          <figcaption>
+            The four tabs STD, SCI, HMS and DUTY sit under the header; the history is shown above
+            the result.
+          </figcaption>
+        </figure>
+        <p>
+          Four modes are available as tabs, and pressing <kbd>CALC</kbd> cycles through them:
+          STD → SCI → HMS → DUTY → back to the calculator menu.
+        </p>
+
+        <h3>6.1 STD</h3>
+        <p>
+          A standard four-function calculator with a four-line history above the result. Press
+          <kbd>POWER</kbd> or <kbd>=</kbd> to evaluate.
+        </p>
+
+        <h3>6.2 SCI</h3>
+        <p>
+          Scientific mode relabels the keypad. <kbd>SET</kbd> becomes <kbd>INV</kbd>; press it to
+          switch the next function to its inverse.
+        </p>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Normal</th>
+                <th>With INV</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><kbd>sin</kbd></td><td>sin</td><td>sin⁻¹</td></tr>
+              <tr><td><kbd>cos</kbd></td><td>cos</td><td>cos⁻¹</td></tr>
+              <tr><td><kbd>tan</kbd></td><td>tan</td><td>tan⁻¹</td></tr>
+              <tr><td><kbd>ln</kbd></td><td>ln</td><td>eˣ</td></tr>
+              <tr><td><kbd>log</kbd></td><td>log</td><td>10ˣ</td></tr>
+              <tr><td><kbd>x²</kbd></td><td>x²</td><td>—</td></tr>
+              <tr><td><kbd>1/x</kbd></td><td>1/x</td><td>—</td></tr>
+              <tr><td><kbd>π</kbd></td><td>π</td><td>—</td></tr>
+              <tr><td><kbd>eˣ</kbd></td><td>eˣ</td><td>—</td></tr>
+              <tr><td><kbd>xʸ</kbd></td><td>power</td><td>—</td></tr>
+              <tr><td><kbd>√x</kbd></td><td>square root</td><td>—</td></tr>
+              <tr><td><kbd>!</kbd></td><td>factorial</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          <kbd>▲</kbd> recalls the memory value and <kbd>▼</kbd> adds the current result to memory;
+          pressing <kbd>▲</kbd> twice in a row clears the memory.
+        </p>
+
+        <h3>6.3 HMS</h3>
+        <p>
+          A dedicated time calculator. Enter hours, minutes and seconds with the colon key and
+          multiply or divide by a plain number; the result stays in hours, minutes and seconds. The
+          dictionary key clears the current entry, and the memory keys work as in STD.
+        </p>
+
+        <h3>6.4 DUTY</h3>
+        <figure class="shot">
+          <img src="shots/duty.png" alt="FlightCal duty time calculator" loading="lazy" />
+          <figcaption>
+            Total duty is broken down into half, quarter, third and two-thirds in three formats at
+            once.
+          </figcaption>
+        </figure>
+        <p>
+          Enter the total duty time and the screen calculates the common fractions in one go:
+          <strong>1/2 Half</strong>, <strong>1/4 Quarter</strong>, <strong>1/3 Third</strong> and
+          <strong>2/3 2Third</strong>. Each line shows the same value three ways — hours and
+          minutes, total minutes and decimal hours — for example <code>04:30 270M 4.5H</code>.
+        </p>
+
+        <h2 id="hot">7. HOT — Holdover Time</h2>
+        <figure class="shot">
+          <img src="shots/hot.png" alt="FlightCal holdover time calculator" loading="lazy" />
+          <figcaption>
+            Seven lines describe the conditions; the holdover time is the green result.
+          </figcaption>
+        </figure>
+        <p>
+          Lines: <strong>Time of Day</strong>, <strong>Weather</strong>,
+          <strong>OAT (Outside)</strong>, <strong>Visibility</strong>, <strong>Fluid</strong>,
+          <strong>Mixture Ratio</strong>, <strong>Holdover HOT</strong>.
+        </p>
+        <ul>
+          <li>
+            <strong>Time of Day</strong> switches between DAY and NIGHT with
+            <kbd>CONV UNIT</kbd> or the arrow keys.
+          </li>
+          <li>
+            <strong>Weather</strong>, <strong>Visibility</strong>, <strong>Fluid</strong> and
+            <strong>Mixture Ratio</strong> cycle through their options with
+            <kbd>CONV UNIT</kbd> or the arrow keys; a tap opens the full list.
+          </li>
+          <li><strong>OAT</strong> is typed in directly and follows the temperature unit in Settings.</li>
+        </ul>
+        <p>
+          The result line shows the holdover time in minutes. If the OAT is above freezing the
+          screen reports that de-icing is not needed. If the temperature is below the fluid's
+          operating range, the result shows as unavailable instead of a time.
+        </p>
+        <p>
+          Press <kbd>POWER</kbd> on the result line, or tap it, to start the
+          <strong>HOT Timer</strong> already loaded with the calculated minutes. The timer screen
+          shows <em>START TIME</em> and <em>Time Remaining</em> and counts down once started;
+          <kbd>MEM</kbd> or <kbd>=</kbd> toggles start and reset, and <kbd>CLR</kbd> clears it.
+        </p>
+
+        <h2 id="wx">8. WX — Weather</h2>
+        <figure class="shot">
+          <img src="shots/wx.png" alt="FlightCal METAR and TAF screen" loading="lazy" />
+          <figcaption>
+            METAR with a decoded summary card, followed by the TAF broken into forecast periods.
+          </figcaption>
+        </figure>
+        <p>
+          Type a four-letter ICAO code and the weather is fetched automatically. The
+          <kbd>CONV UNIT</kbd> key cycles the three modes: <strong>ATIS</strong> →
+          <strong>METAR/TAF</strong> → <strong>NOTAM</strong>. The WX key itself is dual-labelled,
+          so pressing <kbd>NOTAM</kbd> switches straight to NOTAM and pressing it again returns to
+          the previous mode.
+        </p>
+        <ul>
+          <li>
+            <strong>ATIS</strong> shows the current ATIS text for supported airports. If ATIS is not
+            available for that airport the screen falls back to METAR/TAF.
+          </li>
+          <li>
+            <strong>METAR/TAF</strong> shows the raw report, a flight category badge, and a decoded
+            card with wind, visibility, weather, clouds, temperature and pressure (QNH). The TAF is
+            split into its initial, temporary and becoming periods.
+          </li>
+          <li>
+            <strong>NOTAM</strong> lists notices with the filters ALL, RWY, TWY, NAV, AIRSPACE, COM,
+            APRON and FDC, plus a Q-code subject filter. A decode toggle turns the raw text into
+            plain descriptions.
+          </li>
+        </ul>
+        <p>
+          Recent results are cached, so the last weather and NOTAM you looked at is still readable
+          without a connection.
+        </p>
+
+        <h2 id="airport">9. AIRPORT</h2>
+        <figure class="shot">
+          <img src="shots/world.png" alt="FlightCal airport information screen" loading="lazy" />
+          <figcaption>
+            Airport time, sunrise and sunset, current weather and the sections that follow below.
+          </figcaption>
+        </figure>
+        <p>
+          Search by ICAO or IATA code with the on-screen keypad. The <strong>BACK/HOME</strong>
+          button steps back through the airports you opened and <strong>REFRESH</strong> reloads the
+          data with a loading indicator.
+        </p>
+        <p>A single airport page collects:</p>
+        <ul>
+          <li><strong>Time</strong> — airport local time, your own local time and the difference.</li>
+          <li><strong>Sunrise / Sunset</strong> — with a daylight bar for the current day.</li>
+          <li><strong>Weather now</strong> — wind speed and direction on a compass rose.</li>
+          <li><strong>Feels like, UV index, precipitation</strong> and <strong>moon</strong> phase.</li>
+          <li><strong>7-day forecast</strong>, <strong>METAR</strong> and <strong>TAF</strong>.</li>
+          <li><strong>FX</strong> — the local currency against your home currency.</li>
+        </ul>
+
+        <h2 id="dict">10. DICT — Dictionary</h2>
+        <figure class="shot">
+          <img src="shots/dict.png" alt="FlightCal aviation dictionary" loading="lazy" />
+          <figcaption>
+            2,111 pilot and controller terms across four categories, searchable as you type.
+          </figcaption>
+        </figure>
+        <p>
+          The dictionary holds 2,111 terms for pilots and controllers, grouped into
+          <strong>NOTAM</strong>, <strong>WEATHER</strong>, <strong>PILOT / ATC</strong> and
+          <strong>AIP · ICAO</strong>. Type any part of a term to search; the list filters as you
+          type. <kbd>▲</kbd> <kbd>▼</kbd> browse the full A–Z list page by page, and a dash or a
+          slash can be typed for compound terms.
+        </p>
+        <p>
+          Press <kbd>POWER</kbd> on an entry to read the full definition and <kbd>BACK</kbd> to
+          return to the list. <kbd>DICT</kbd> opens the dictionary from any other screen.
+        </p>
+
+        <h2 id="set">11. SET — Settings</h2>
+        <figure class="shot">
+          <img src="shots/set.png" alt="FlightCal settings screen" loading="lazy" />
+          <figcaption>Settings scroll below the visible area; ▲ ▼ moves through them.</figcaption>
+        </figure>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Setting</th>
+                <th>Options / meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Theme</td>
+                <td>Auto (System), Light, Dark, Dusk, Night.</td>
+              </tr>
+              <tr><td>Temperature Unit</td><td>Celsius (°C) or Fahrenheit (°F).</td></tr>
+              <tr><td>Weight Unit</td><td>Kilograms (kg) or Pounds (lbs).</td></tr>
+              <tr><td>Pressure Unit</td><td>Hectopascal (hPa) or Inches Hg (inHg).</td></tr>
+              <tr><td>Altitude Unit</td><td>Feet (ft) or Meters (m).</td></tr>
+              <tr><td>Key Haptic</td><td>Vibration feedback on key presses, on or off.</td></tr>
+              <tr>
+                <td>Home Currency</td>
+                <td>Base currency used by the converter and the airport FX section.</td>
+              </tr>
+              <tr><td>Base Airport</td><td>Default airport code.</td></tr>
+              <tr>
+                <td>Startup Screen</td>
+                <td>
+                  The screen shown at launch: E6-B, WX, AIRPORT, DUTY, CALC, CONV, CURR, HOT or
+                  DICT.
+                </td>
+              </tr>
+              <tr><td>Reset</td><td>Restores the default settings.</td></tr>
+              <tr><td>Version</td><td>Installed app version.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          The unit settings are used everywhere else in the app — E6-B results, fuel weights,
+          altimeter values and holdover temperatures all follow them.
+        </p>
+
+        <h2 id="timer">12. STOP / TIMER</h2>
+        <figure class="shot">
+          <img src="shots/timer.png" alt="FlightCal stopwatch screen" loading="lazy" />
+          <figcaption>
+            The chronograph face with a digital readout; the keypad becomes START / PAUSE and RESET.
+          </figcaption>
+        </figure>
+        <p>
+          The timer screen has two modes. <kbd>CONV UNIT</kbd> switches between
+          <strong>STOPWATCH</strong> and <strong>COUNTDOWN</strong>.
+        </p>
+        <ul>
+          <li><kbd>POWER</kbd> or <kbd>=</kbd> starts and pauses.</li>
+          <li><kbd>CLR</kbd> or <kbd>▼</kbd> resets to zero.</li>
+          <li><kbd>▲</kbd> adds one minute to the countdown.</li>
+          <li>
+            In countdown mode you can type a six-digit time as <code>hhmmss</code>; the maximum is
+            99:59:59.
+          </li>
+        </ul>
+        <p>
+          The screen shows an analog chronograph face together with a digital readout, so it can be
+          read at a glance in the cockpit.
+        </p>
+
+        <h2 id="data">13. Data, Caching and Trial</h2>
+        <ul>
+          <li>
+            Settings, last inputs and cached weather, NOTAM and exchange rates are stored on the
+            device, so the app keeps working without a connection where possible.
+          </li>
+          <li>
+            Weather, NOTAM and exchange-rate features need a network connection to refresh; when
+            offline, the last cached values are shown and marked accordingly.
+          </li>
+          <li>
+            FlightCal runs as a 30-day trial, after which the premium features can be unlocked
+            through the App Store or Google Play. Purchase handling is described in the
+            <a href="index.html">Privacy Policy</a>.
+          </li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>
+          Questions, bug reports or feature requests:
+          <br />
+          SmartPilots
+          <br />
+          Email: <a href="mailto:smartpilot@smartpilot.co.kr">smartpilot@smartpilot.co.kr</a>
+          <br />
+          <a href="support.ko.html" lang="ko">한국어 설명서 보기</a>
+        </p>
+
+        <div class="footer muted">
+          FlightCal is provided as an operational support tool only and is not a substitute for
+          approved flight planning, operational control, or company procedures.
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
