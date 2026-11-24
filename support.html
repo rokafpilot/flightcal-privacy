@@ -218,11 +218,11 @@
 
         <h1>FlightCal User Guide</h1>
         <p class="meta">
-          App version 1.0.21 · build 30
+          App version 1.0.30 · build 40
           <br />
           Service provider: SmartPilots
           <br />
-          Updated: November 9, 2026
+          Updated: November 24, 2026
         </p>
 
         <p>
@@ -337,7 +337,7 @@
               </tr>
               <tr>
                 <td><kbd>CONV</kbd></td>
-                <td>Unit conversion menu with 11 categories.</td>
+                <td>Unit conversion menu with 12 categories.</td>
               </tr>
               <tr>
                 <td><kbd>CURR</kbd></td>
@@ -553,7 +553,7 @@
         <h2 id="conv">4. CONV — Unit Conversion</h2>
         <figure class="shot">
           <img src="shots/conv.png" alt="FlightCal unit conversion menu" loading="lazy" />
-          <figcaption>Eleven conversion categories, each remembering its last result.</figcaption>
+          <figcaption>Twelve conversion categories, each remembering its last result.</figcaption>
         </figure>
         <p>
           Choose a category and the conversion screen shows four lines: the value you type, the
@@ -628,6 +628,11 @@
                 <td>Local time conversion between zones</td>
                 <td>—</td>
               </tr>
+              <tr>
+                <td>Coordinate</td>
+                <td>DD, DDM, DMS, ARINC 424, FMS, UTM, MGRS</td>
+                <td>—</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -636,12 +641,20 @@
           The default pair for temperature, weight, pressure and length follows the units chosen in
           Settings, so a pilot working in °C and hPa always starts from the familiar side.
         </p>
+        <p>
+          Coordinate converts a position between the formats pilots meet in the cockpit: decimal
+          degrees, degrees-decimal minutes, degrees-minutes-seconds, the packed ARINC 424 / FMS
+          form, and the UTM / MGRS grid references. Type the position into any input line — DD, DDM,
+          DMS, ARINC 424, or separate latitude and longitude — and every other format updates at
+          once. FMS, UTM and MGRS are read-only results.
+        </p>
 
         <h2 id="curr">5. CURR — Currency</h2>
         <figure class="shot">
           <img src="shots/curr.png" alt="FlightCal currency converter" loading="lazy" />
           <figcaption>
-            Amount, SET FROM, CONV TO, Result and Rate — the rate line shows how fresh the quote is.
+            Amount, SET FROM, CONV TO, Result and Rate, with the FAV bar for saved pairs at the
+            bottom.
           </figcaption>
         </figure>
         <p>
@@ -690,6 +703,14 @@
             </tbody>
           </table>
         </div>
+
+        <p>
+          Below the five lines a <strong>FAV</strong> bar keeps the currency pairs you use most.
+          Press <kbd>☆ SAVE</kbd> to store the pair on screen (up to 4 pairs) and tap a chip to load
+          it again in one step; the pair currently on screen is highlighted and a saved pair reads
+          <kbd>★ SAVED</kbd>. When the bar is full the label shows
+          <code>FAV FULL · MAX 4</code>. Saved pairs are kept on the device.
+        </p>
 
         <p>
           The CURR menu also lists 12 frequently used currency presets, which open the converter
@@ -877,6 +898,13 @@
         </p>
 
         <h2 id="map">9. MAP — Weather Map</h2>
+        <figure class="shot">
+          <img src="shots/map.png" alt="FlightCal weather map" loading="lazy" />
+          <figcaption>
+            Weather map with the SAT, CLOUD, FCST, WIND, PROG and SIGMET layers, a timeline
+            slider and the nearby-traffic finder.
+          </figcaption>
+        </figure>
         <p>
           <kbd>MAP</kbd> (the <kbd>RADAR</kbd> key) shows satellite imagery and hazard overlays. The
           map refreshes automatically every 20 seconds.
@@ -898,7 +926,6 @@
                   (GOES-West / East, Himawari-9, Meteosat) as you zoom in.
                 </td>
               </tr>
-              <tr><td>RAIN</td><td>NASA IMERG 30-minute global precipitation rate.</td></tr>
               <tr><td>FCST</td><td>ECCC GDPS global precipitation forecast (not radar).</td></tr>
               <tr>
                 <td>WIND</td>

@@ -219,11 +219,11 @@
 
         <h1>FlightCal 사용 설명서</h1>
         <p class="meta">
-          앱 버전 1.0.21 · build 30
+          앱 버전 1.0.30 · build 40
           <br />
           제공자: SmartPilots
           <br />
-          최종 수정: 2026년 11월 9일
+          최종 수정: 2026년 11월 24일
         </p>
 
         <p>
@@ -330,7 +330,7 @@
               </tr>
               <tr>
                 <td><kbd>CONV</kbd></td>
-                <td>단위 변환 메뉴. 11개 카테고리입니다.</td>
+                <td>단위 변환 메뉴. 12개 카테고리입니다.</td>
               </tr>
               <tr>
                 <td><kbd>CURR</kbd></td>
@@ -542,7 +542,7 @@
         <h2 id="conv">4. CONV — 단위 변환</h2>
         <figure class="shot">
           <img src="shots/conv.png" alt="FlightCal 단위 변환 메뉴" loading="lazy" />
-          <figcaption>11개 변환 카테고리. 카테고리마다 마지막 결과를 기억합니다.</figcaption>
+          <figcaption>12개 변환 카테고리. 카테고리마다 마지막 결과를 기억합니다.</figcaption>
         </figure>
         <p>
           카테고리를 고르면 변환 화면에 네 줄이 나옵니다. 입력값, <strong>SET UNIT</strong> 줄,
@@ -615,6 +615,11 @@
                 <td>시간대 간 현지 시각 변환</td>
                 <td>—</td>
               </tr>
+              <tr>
+                <td>Coordinate</td>
+                <td>DD, DDM, DMS, ARINC 424, FMS, UTM, MGRS</td>
+                <td>—</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -623,12 +628,19 @@
           온도, 무게, 압력, 거리의 기본 조합은 설정에서 고른 단위를 따릅니다. °C와 hPa를 쓰는
           조종사라면 항상 익숙한 쪽에서 변환이 시작됩니다.
         </p>
+        <p>
+          Coordinate는 조종석에서 마주치는 좌표 형식 사이를 변환합니다. 소수 도(DD), 도-소수 분
+          (DDM), 도-분-초(DMS), ARINC 424 / FMS 압축 형식, 그리고 UTM / MGRS 격자 좌표입니다.
+          입력 줄(DD, DDM, DMS, ARINC 424 또는 위도·경도 각각) 가운데 하나에 위치를 입력하면 나머지
+          형식이 한꺼번에 갱신됩니다. FMS, UTM, MGRS는 읽기 전용 결과입니다.
+        </p>
 
         <h2 id="curr">5. CURR — 환율</h2>
         <figure class="shot">
           <img src="shots/curr.png" alt="FlightCal 환율 계산기" loading="lazy" />
           <figcaption>
-            Amount, SET FROM, CONV TO, Result, Rate 다섯 줄. Rate 줄에 시세 상태가 함께 표시됩니다.
+            Amount, SET FROM, CONV TO, Result, Rate 다섯 줄과, 하단에 저장한 통화쌍을 모아 둔 FAV
+            바가 있습니다.
           </figcaption>
         </figure>
         <p>
@@ -675,6 +687,14 @@
             </tbody>
           </table>
         </div>
+
+        <p>
+          다섯 줄 아래의 <strong>FAV</strong> 바에는 자주 쓰는 통화쌍을 모아 둡니다.
+          <kbd>☆ SAVE</kbd> 를 누르면 현재 화면의 통화쌍이 저장되고(최대 4개), 칩을 탭하면 그
+          조합이 한 번에 불러와집니다. 현재 화면의 통화쌍은 강조되고, 저장된 통화쌍은
+          <kbd>★ SAVED</kbd> 로 표시됩니다. 네 개가 모두 차면
+          <code>FAV FULL · MAX 4</code> 로 안내합니다. 저장한 통화쌍은 기기에 보관됩니다.
+        </p>
 
         <p>
           CURR 메뉴에는 자주 쓰는 통화 12개의 프리셋도 있습니다. 선택하면 해당 통화 조합으로
@@ -851,6 +871,13 @@
         </p>
 
         <h2 id="map">9. MAP — 기상 지도</h2>
+        <figure class="shot">
+          <img src="shots/map.png" alt="FlightCal 기상 지도" loading="lazy" />
+          <figcaption>
+            SAT, CLOUD, FCST, WIND, PROG, SIGMET 레이어와 타임라인 슬라이더, 주변 항공기 찾기를
+            제공하는 기상 지도입니다.
+          </figcaption>
+        </figure>
         <p>
           <kbd>MAP</kbd>(<kbd>RADAR</kbd> 키)은 위성 영상과 위험 요소 오버레이를 보여 줍니다. 지도는
           20초마다 자동으로 갱신됩니다.
@@ -872,7 +899,6 @@
                   Himawari-9, Meteosat) 영상으로 대체됩니다.
                 </td>
               </tr>
-              <tr><td>RAIN</td><td>NASA IMERG 30분 전지구 강수율.</td></tr>
               <tr><td>FCST</td><td>ECCC GDPS 전지구 강수 예보(레이더 아님).</td></tr>
               <tr>
                 <td>WIND</td>
